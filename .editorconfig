@@ -12,3 +12,7 @@ insert_final_newline = true
 [**.*]
 indent_style = tab
 
+# Space indentation for Markdown
+[**.md]
+indent_style = space
+

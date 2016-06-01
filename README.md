@@ -1,7 +1,7 @@
 # fluent_fixtures
 
 home
-: http://deveiate.org/projects/fluent_fixtures
+: http://deveiate.org/projects/FluentFixtures
 
 code
 : http://bitbucket.org/ged/fluent_fixtures
@@ -15,7 +15,9 @@ docs
 
 ## Description
 
-This module is a toolkit for building a collection of composable fixtures with a fluent interface for testing.
+A toolkit for building a collection of composable testing fixtures with a fluent interface.
+
+To get started using the library, check out the [Getting Started](GettingStarted_md.html) guide.
 
 
 ## Prerequisites

@@ -1,0 +1,14 @@
+2016-06-01  Michael Granger  <ged@FaerieMUD.org>
+
+	* .document, .editorconfig, .gems, .gitignore, .hgignore, .pryrc,
+	.rdoc_options, .ruby-gemset, .ruby-version, .simplecov, Gemfile,
+	History.md, LICENSE.txt, Manifest.txt, README.md, Rakefile,
+	certs/ged.pem, fluent_fixtures.gemspec, lib/fluent_fixtures.rb,
+	lib/fluent_fixtures/collection.rb, lib/fluent_fixtures/dsl.rb,
+	lib/fluent_fixtures/factory.rb,
+	spec/fluent_fixtures/collection_spec.rb,
+	spec/fluent_fixtures/dsl_spec.rb,
+	spec/fluent_fixtures/factory_spec.rb, spec/fluent_fixtures_spec.rb,
+	spec/spec_helper.rb:
+	Initial import
+	[76c036a3676b] [tip]
