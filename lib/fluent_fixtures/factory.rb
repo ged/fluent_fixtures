@@ -153,7 +153,7 @@ class FluentFixtures::Factory
 
 
 	### Apply a decorator declared by calling the proxy method with the specified
-	### +name+, +args+, and +block+ to the given +instance+. 
+	### +name+, +args+, and +block+ to the given +instance+.
 	def apply_method_decorator( instance, args, name, block )
 		self.log.debug "Mutating instance %p with regular method %p( %p, %p )" %
 			[ instance, name, args, block ]

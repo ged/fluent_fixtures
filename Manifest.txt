@@ -1,8 +1,8 @@
 .document
-.editorconfig
 .rdoc_options
 .simplecov
 ChangeLog
+GettingStarted.md
 History.md
 LICENSE.txt
 Manifest.txt
@@ -10,6 +10,10 @@ README.md
 Rakefile
 lib/fluent_fixtures.rb
 lib/fluent_fixtures/collection.rb
+lib/fluent_fixtures/dsl.rb
 lib/fluent_fixtures/factory.rb
+spec/fluent_fixtures/collection_spec.rb
+spec/fluent_fixtures/dsl_spec.rb
+spec/fluent_fixtures/factory_spec.rb
 spec/fluent_fixtures_spec.rb
 spec/spec_helper.rb

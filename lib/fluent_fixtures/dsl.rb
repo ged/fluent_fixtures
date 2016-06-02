@@ -71,7 +71,7 @@ module FluentFixtures::DSL
 
 
 	### Add a callback to the fixture that will passed new instances after all
-	### decorators have been applied and immediately before it's saved. The results of 
+	### decorators have been applied and immediately before it's saved. The results of
 	### the block will be used as the fixtured instance. This can be
 	### used for tables with fixed rows to use `find_or_create` or similar.
 	def before_saving( &block )
