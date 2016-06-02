@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
-# stub: fluent_fixtures 0.0.1.pre.20160601191205 ruby lib
+# stub: fluent_fixtures 0.0.1.pre.20160601191621 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "fluent_fixtures".freeze
-  s.version = "0.0.1.pre.20160601191205"
+  s.version = "0.0.1.pre.20160601191621"
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
