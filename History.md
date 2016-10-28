@@ -1,3 +1,11 @@
+## v0.2.0 [2016-10-28] Michael Granger <ged@FaerieMUD.org>
+
+Bugfixes:
+- Fix the way #create and #instance handle their arguments. Arguments are
+  now iterated over and used to set attributes instead of just being
+	discarded.
+
+
 ## v0.1.0 [2016-10-28] Michael Granger <ged@FaerieMUD.org>
 
 New feature:
