@@ -62,19 +62,24 @@ class FluentFixtures::Factory
 
 	### Create an instance, apply declared decorators in order, and return the resulting
 	### object.
-	def instance( *args, &block )
+	def instance( args={}, &block )
 		instance = self.fixture_module.
 			fixtured_instance( *self.constructor_args, &self.constructor_block )
 
-		self.decorators.each do |decorator_name, args, block|
-			# :TODO: Reify other fixtures in `args` here?
+		self.decorators.each do |decorator_name, decorator_args, block|
+			# :TODO: Reify other fixtures in `decorator_args` here?
 			if !decorator_name
 				self.apply_inline_decorator( instance, block )
 			elsif self.fixture_module.decorators.key?( decorator_name )
-				self.apply_named_decorator( instance, args, decorator_name )
+				self.apply_named_decorator( instance, decorator_args, decorator_name )
 			else
-				self.apply_method_decorator( instance, args, decorator_name, block )
+				self.apply_method_decorator( instance, decorator_args, decorator_name, block )
 			end
+		end
+
+		args.each_pair do |attrname, value|
+			# :TODO: Reify the `value` if it responds to #create?
+			instance.public_send( "#{attrname}=", value )
 		end
 
 		# If the factory was called with a block, use it as a final decorator before
@@ -82,9 +87,9 @@ class FluentFixtures::Factory
 		if block
 			self.log.debug "Applying inline decorator %p" % [ block ]
 			if block.arity.zero?
-				instance.instance_exec( *args, &block )
+				instance.instance_exec( &block )
 			else
-				block.call( instance, *args )
+				block.call( instance )
 			end
 		end
 
@@ -93,9 +98,9 @@ class FluentFixtures::Factory
 
 
 	### Return a saved #instance of the fixtured object.
-	def create( *args, &block )
+	def create( args={}, &block )
 		obj = self.with_transaction do
-			obj = self.instance( *args, &block )
+			obj = self.instance( args, &block )
 			obj = self.fixture_module.call_before_saving( obj ) if
 				self.fixture_module.respond_to?( :call_before_saving )
 

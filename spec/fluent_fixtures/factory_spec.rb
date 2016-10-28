@@ -110,6 +110,36 @@ describe FluentFixtures::Factory do
 	end
 
 
+	it "sets attributes on the object when #instance is passed hash arguments" do
+		object = factory.instance( name: 'Dan', login: 'danp', email: 'danp@example.com' )
+
+		expect( object ).to be_a( fixtured_class )
+		expect( object.name ).to eq( 'Dan' )
+		expect( object.login ).to eq( 'danp' )
+		expect( object.email ).to eq( 'danp@example.com' )
+		expect( object ).to_not be_saved
+	end
+
+
+	it "sets attributes on the object when #instance is passed a Hash" do
+		values = { name: 'Dan', login: 'danp', email: 'danp@example.com' }
+		object = factory.instance( values )
+
+		expect( object ).to be_a( fixtured_class )
+		expect( object.name ).to eq( 'Dan' )
+		expect( object.login ).to eq( 'danp' )
+		expect( object.email ).to eq( 'danp@example.com' )
+		expect( object ).to_not be_saved
+	end
+
+
+	it "raises an argument when #instance is passed something that doesn't #each_pair" do
+		expect {
+			factory.instance( [:missiles, :weasels] )
+		}.to raise_error( NoMethodError, /each_pair/i )
+	end
+
+
 	it "executes a block passed to #instance in the context of the new object if it doesn't declare arguments" do
 		object = factory.instance do
 			self.name = 'Dan'
@@ -137,6 +167,24 @@ describe FluentFixtures::Factory do
 		expect( object.login ).to eq( 'danp' )
 		expect( object.email ).to eq( 'danp@example.com' )
 		expect( object ).to_not be_saved
+	end
+
+
+	it "sets attributes before saving when #create is passed a Hash" do
+		object = factory.create( name: 'Jenn', login: 'jennnn', email: 'jennnn@allthejennifers.org' )
+
+		expect( object ).to be_a( fixtured_class )
+		expect( object.name ).to eq( 'Jenn' )
+		expect( object.login ).to eq( 'jennnn' )
+		expect( object.email ).to eq( 'jennnn@allthejennifers.org' )
+		expect( object ).to be_saved
+	end
+
+
+	it "raises an argument when #create is passed something that doesn't #each_pair" do
+		expect {
+			factory.create( [:chocolate, :darkroom] )
+		}.to raise_error( NoMethodError, /each_pair/i )
 	end
 
 
