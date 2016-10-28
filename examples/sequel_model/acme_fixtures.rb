@@ -21,34 +21,34 @@ puts Acme::Fixtures.describe
 puts
 
 puts "Create a factory that will create instances of Acme::User:"
-factory = Acme::Fixtures.user
-puts factory.inspect
+user_factory = Acme::Fixtures.user
+puts user_factory.inspect
 
 puts
 
 puts "Use it to create a few (unsaved) instances:"
-users = 3.times.map { factory.instance }
+users = 3.times.map { user_factory.instance }
 puts users.inspect
 
 puts
 
 puts "Make a mutation of the previous factory that will create instances with a random first name:"
-factory = factory.with_random_first_name
-puts factory.inspect
-users = 3.times.map { factory.instance }
+user_factory = user_factory.with_random_first_name
+puts user_factory.inspect
+users = 3.times.map { user_factory.instance }
 puts users.inspect
 
 puts
 
 puts "Make a mutation of the random first name factory that will create instances with " \
 	"a random last name too:"
-factory = factory.with_random_last_name
-puts factory.inspect
-users = 3.times.map { factory.instance }
+user_factory = user_factory.with_random_last_name
+puts user_factory.inspect
+users = 3.times.map { user_factory.instance }
 puts users.inspect
 
 puts
 
 puts "Use the same factory, but create saved instances now:"
-users = 3.times.map { factory.create }
+users = 3.times.map { user_factory.create }
 puts users.inspect
