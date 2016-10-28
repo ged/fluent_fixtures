@@ -15,10 +15,13 @@ docs
 
 ## Description
 
-A toolkit for building a collection of composable testing fixtures with a fluent interface.
+FluentFixtures is a toolkit for building testing objects with a fluent interface.
 
-To get started using the library, check out the [Getting Started](GettingStarted_md.html) guide.
+It allows testers to describe test data via composition rather than setting up fragile monolithic datasets.
 
+To see a walkthrough of how you might set your own fixtures up, check out the [The Setup](TheSetup_md.html).
+
+If you're already on your way and just want some API docs, [we got those, too](FluentFixtures.html).
 
 ## Prerequisites
 
