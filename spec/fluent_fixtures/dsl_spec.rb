@@ -60,12 +60,22 @@ describe FluentFixtures::DSL do
 	end
 
 
-	it "can register a creation hook to allow for unusual models" do
+	it "can register a before-creation hook to allow for unusual models" do
 		expect {
 			fixture_module.before_saving do |obj|
 				obj
 			end
 		}.to change { fixture_module.respond_to?(:call_before_saving) }.
+			from( false ).to( true )
+	end
+
+
+	it "can register an after-creation hook to allow for unusual models" do
+		expect {
+			fixture_module.after_saving do |obj|
+				obj
+			end
+		}.to change { fixture_module.respond_to?(:call_after_saving) }.
 			from( false ).to( true )
 	end
 

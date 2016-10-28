@@ -101,6 +101,8 @@ class FluentFixtures::Factory
 
 			self.try_to_save( obj )
 
+			obj = self.fixture_module.call_after_saving( obj ) if
+				self.fixture_module.respond_to?( :call_after_saving )
 			obj
 		end
 

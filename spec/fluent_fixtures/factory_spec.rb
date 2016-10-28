@@ -14,6 +14,7 @@ describe FluentFixtures::Factory do
 		Class.new do
 			def initialize( params={} )
 				@saved = false
+				@deleted = false
 				params.each do |name, value|
 					self.send( "#{name}=", value )
 				end
@@ -28,6 +29,8 @@ describe FluentFixtures::Factory do
 				self.login = "__#{self.login}__"
 				self
 			end
+			def delete; @deleted = true; end
+			def deleted?; @deleted; end
 		end
 	end
 
@@ -199,6 +202,19 @@ describe FluentFixtures::Factory do
 		result = factory.create
 
 		expect( result ).to be( :not_the_instance )
+	end
+
+
+	it "calls its fixture module's #call_after_saving method after creating if it implements it" do
+		def fixture_module.call_after_saving( instance )
+			instance.delete
+			instance
+		end
+
+		result = factory.create
+
+		expect( result ).to be_an_instance_of( fixtured_class )
+		expect( result ).to be_deleted
 	end
 
 

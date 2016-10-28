@@ -1,4 +1,4 @@
-hoe-deveiate -v '~> 0.3'
-loggability -v '~> 0.11'
-inflecto -v '~> 0.0'
-faker -v '~> 1.6'
+hoe-deveiate
+loggability
+inflecto
+faker

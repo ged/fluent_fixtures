@@ -2,12 +2,12 @@
 .rdoc_options
 .simplecov
 ChangeLog
-GettingStarted.md
 History.md
 LICENSE.txt
 Manifest.txt
 README.md
 Rakefile
+TheSetup.md
 lib/fluent_fixtures.rb
 lib/fluent_fixtures/collection.rb
 lib/fluent_fixtures/dsl.rb

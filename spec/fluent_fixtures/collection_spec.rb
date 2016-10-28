@@ -115,9 +115,9 @@ describe FluentFixtures::Collection do
 
 
 	it "allows the loading prefix to be customized" do
-		collection.fixture_path_prefix( 'acme/fixtures' )
+		collection.fixture_path_prefix( 'example/fixtures' )
 		expect( collection ).to receive( :require ).
-			with( "acme/fixtures/foo" ).and_return( false )
+			with( "example/fixtures/foo" ).and_return( false )
 
 		collection.load( :foo )
 	end

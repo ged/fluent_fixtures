@@ -62,7 +62,7 @@ module FluentFixtures::DSL
 	alias_method :has_decorator?, :decorator?
 
 
-	### Declare a +new_name+ for the decorator declarted with with +original_name+.
+	### Declare a +new_name+ for the decorator declared with with +original_name+.
 	def alias_decorator( new_name, original_name )
 		block = self.decorators[ original_name.to_sym ] or
 			raise ScriptError, "undefined decorator %p" % [ original_name ]
@@ -70,12 +70,18 @@ module FluentFixtures::DSL
 	end
 
 
-	### Add a callback to the fixture that will passed new instances after all
+	### Add a callback to the fixture that will be passed new instances after all
 	### decorators have been applied and immediately before it's saved. The results of
-	### the block will be used as the fixtured instance. This can be
-	### used for tables with fixed rows to use `find_or_create` or similar.
+	### the block will be used as the fixtured instance.
 	def before_saving( &block )
 		define_singleton_method( :call_before_saving, &block )
+	end
+
+
+	### Add a callback to the fixture that will be passed new instances after it's
+	### saved. The results of the block will be used as the fixtured instance.
+	def after_saving( &block )
+		define_singleton_method( :call_after_saving, &block )
 	end
 
 
