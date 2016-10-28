@@ -3,3 +3,4 @@ doc/
 \.esproj/
 \.yml$
 ChangeLog
+pkg/
