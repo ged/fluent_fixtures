@@ -293,6 +293,57 @@ describe FluentFixtures::Factory do
 	end
 
 
+	describe "enumerator/generator" do
+
+		it "is Enumerable" do
+			expect( factory ).to be_an( Enumerable )
+			expect( factory.each ).to be_an( Enumerator )
+		end
+
+
+		it "can create an enumerator (generator) of unsaved instances" do
+			enum = factory.generator
+
+			expect( enum ).to be_a( Enumerator )
+
+			instance = enum.next
+
+			expect( instance ).to be_a( fixtured_class )
+			expect( instance ).to_not be_saved
+		end
+
+
+		it "can create an enumerator (generator) of saved instances" do
+			enum = factory.generator( create: true )
+
+			expect( enum ).to be_a( Enumerator )
+
+			instance = enum.next
+
+			expect( instance ).to be_a( fixtured_class )
+			expect( instance ).to be_saved
+		end
+
+
+		it "is a limited generator by default" do
+			enum = factory.generator
+			expect( enum.size ).to eq( described_class::DEFAULT_GENERATOR_LIMIT )
+		end
+
+
+		it "can be limited to a different size" do
+			enum = factory.generator( limit: 5 )
+			expect( enum.size ).to eq( 5 )
+			expect( enum.to_a ).to be_an( Array ).and( have_attributes(length: 5) )
+		end
+
+
+		it "can be created as an infinite generator" do
+			enum = factory.generator( limit: nil )
+			expect( enum.size ).to eq( Float::INFINITY )
+		end
+
+	end
 
 end
 

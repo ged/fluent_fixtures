@@ -8,10 +8,14 @@ require 'fluent_fixtures' unless defined?( FluentFixtures )
 # The fluent fixture monadic factory class.
 class FluentFixtures::Factory
 	extend Loggability
+	include Enumerable
 
 
 	# The methods to look for to save new instances when #create is called
 	CREATE_METHODS = %i[ save_changes save ]
+
+	# The default limit for generators
+	DEFAULT_GENERATOR_LIMIT = 10_000
 
 
 	# Loggability API -- log to the FluentFixtures logger
@@ -118,6 +122,35 @@ class FluentFixtures::Factory
 	### Return a copy of the factory that will apply the specified +block+ as a decorator.
 	def decorated_with( &block )
 		return self.mutate( nil, &block )
+	end
+
+
+	### Iterate over DEFAULT_GENERATOR_LIMIT instances of the fixtured object, yielding
+	### each new instance if a block is provided. If no block is provided, returns an
+	### Enumerator.
+	def each( &block )
+		return self.generator unless block
+		return self.generator.each( &block )
+	end
+
+
+	### Return an infinite generator for unsaved instances of the fixtured object.
+	def generator( create: false, limit: DEFAULT_GENERATOR_LIMIT )
+		return Enumerator.new( limit || Float::INFINITY ) do |yielder|
+			count = 0
+			loop do
+				break if limit && count >= limit
+				obj = if create
+						self.create
+					else
+						self.instance
+					end
+
+				yielder.yield( obj )
+
+				count += 1
+			end
+		end
 	end
 
 
