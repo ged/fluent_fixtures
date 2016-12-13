@@ -48,6 +48,13 @@ module FluentFixtures::DSL
 	end
 
 
+	### Register one or more +other_fixtures+ that should be loaded when this
+	### fixture is loaded.
+	def depends_on( *other_fixtures )
+		self.collection.load( *other_fixtures )
+	end
+
+
 	### Declare a decorator for the fixture with the specified +name+ that will use the
 	### given +block+.
 	def decorator( name, &block )

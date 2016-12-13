@@ -46,6 +46,12 @@ describe FluentFixtures::DSL do
 	end
 
 
+	it "can load other fixtures it depends on" do
+		expect( collection ).to receive( :load ).with( :lovers, :tyrants, :kings )
+		fixture_module.depends_on( :lovers, :tyrants, :kings )
+	end
+
+
 	it "allows the declaration of decorator blocks" do
 		no_email_block = Proc.new { self.email = nil }
 		fixture_module.decorator( :with_no_email, &no_email_block )
