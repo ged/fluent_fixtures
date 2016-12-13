@@ -34,7 +34,7 @@ hoespec = Hoe.spec 'fluent_fixtures' do |spec|
 
 	spec.dependency 'faker',                   '~> 1.6', :developer
 	spec.dependency 'hoe-deveiate',            '~> 0.3', :developer
-	spec.dependency 'simplecov',               '~> 0.7', :developer
+	spec.dependency 'simplecov',               '~> 0.12', :developer
 	spec.dependency 'rdoc-generator-fivefish', '~> 0.1', :developer
 
 	spec.require_ruby_version( '>=2.2.0' )
