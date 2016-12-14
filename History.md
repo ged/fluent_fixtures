@@ -1,3 +1,10 @@
+## v0.4.0 [2016-12-13] Michael Granger <ged@FaerieMUD.org>
+
+Enchancements:
+
+- Added `depends_on` to the fixture DSL.
+
+
 ## v0.3.0 [2016-11-26] Michael Granger <ged@FaerieMUD.org>
 
 Enhancements:
