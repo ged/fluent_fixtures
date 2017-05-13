@@ -136,6 +136,7 @@ describe FluentFixtures::Collection do
 
 		it "adds instance data to its fixture modules" do
 			expect( extending_module.decorators ).to be_a( Hash )
+			expect( extending_module.decorator_options ).to be_a( Hash )
 		end
 
 	end

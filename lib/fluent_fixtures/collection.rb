@@ -79,6 +79,7 @@ module FluentFixtures::Collection
 
 		fixture_mod.extend( FluentFixtures::DSL )
 		fixture_mod.instance_variable_set( :@decorators, {} )
+		fixture_mod.instance_variable_set( :@decorator_options, {} )
 		fixture_mod.instance_variable_set( :@fixtured_class, nil )
 		fixture_mod.instance_variable_set( :@base_fixture, nil )
 

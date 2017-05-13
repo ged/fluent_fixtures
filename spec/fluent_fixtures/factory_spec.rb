@@ -15,14 +15,20 @@ describe FluentFixtures::Factory do
 			def initialize( params={} )
 				@saved = false
 				@deleted = false
+				@roles = []
+				@copied = false
 				params.each do |name, value|
 					self.send( "#{name}=", value )
 				end
 				yield if block_given?
 			end
-			attr_accessor :name, :login, :email
+			def initialize_copy( _original )
+				@copied = true
+			end
+			attr_accessor :name, :login, :email, :roles
 			def save; @saved = true; end
 			def saved?; @saved; end
+			def copied?; @copied; end
 			def bizarroify
 				self.name = "Bizarro #{self.name}"
 				self.email = "bizarro+#{self.email}"
@@ -31,6 +37,10 @@ describe FluentFixtures::Factory do
 			end
 			def delete; @deleted = true; end
 			def deleted?; @deleted; end
+			def add_role( role )
+				raise "not saved" unless self.saved?
+				self.roles << role
+			end
 		end
 	end
 
@@ -263,6 +273,39 @@ describe FluentFixtures::Factory do
 
 		expect( result ).to be_an_instance_of( fixtured_class )
 		expect( result ).to be_deleted
+	end
+
+
+	it "supports decorators that save the object before running" do
+		fixture_module.decorator( :with_role, presave: true ) do |role|
+			self.add_role( role )
+		end
+
+		object = factory.with_role( 'admin' ).instance
+
+		expect( object ).to be_saved
+		expect( object.roles ).to include( 'admin' )
+	end
+
+
+	it "calls pre- and post-save hooks for decorators with presaving" do
+		fixture_module.decorator( :with_role, presave: true ) do |role|
+			self.add_role( role )
+		end
+		def fixture_module.call_before_saving( instance )
+			instance.dup
+		end
+		def fixture_module.call_after_saving( instance )
+			instance.delete
+			instance
+		end
+
+		object = factory.with_role( 'admin' ).instance
+
+		expect( object ).to be_saved
+		expect( object ).to be_copied
+		expect( object ).to be_deleted
+		expect( object.roles ).to include( 'admin' )
 	end
 
 

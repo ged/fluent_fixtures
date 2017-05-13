@@ -14,6 +14,9 @@ module FluentFixtures::DSL
 	# The Hash of decorators declared for this fixture module
 	attr_reader :decorators
 
+	# The Hash of options hashes for declared decorators
+	attr_reader :decorator_options
+
 	##
 	# The name of the base fixture for the fixture module as a Symbol
 	attr_accessor :base_fixture
@@ -57,8 +60,10 @@ module FluentFixtures::DSL
 
 	### Declare a decorator for the fixture with the specified +name+ that will use the
 	### given +block+.
-	def decorator( name, &block )
-		self.decorators[ name.to_sym ] = block
+	def decorator( name, **options, &block )
+		name = name.to_sym
+		self.decorators[ name ] = block
+		self.decorator_options[ name ] = options
 	end
 
 

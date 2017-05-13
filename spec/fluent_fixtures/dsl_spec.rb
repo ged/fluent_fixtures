@@ -86,6 +86,17 @@ describe FluentFixtures::DSL do
 	end
 
 
+	it "can indicate that an object needs to be saved before a decorator is applied" do
+		with_associated_object_block = Proc.new  {|obj| self.associated_object = obj }
+		fixture_module.decorator( :with_associated_object, presave: true, &with_associated_object_block )
+
+		expect( fixture_module ).to have_decorator( :with_associated_object )
+
+		expect( fixture_module.decorators[:with_associated_object] ).to be( with_associated_object_block )
+		expect( fixture_module.decorator_options[:with_associated_object] ).to include( presave: true )
+	end
+
+
 	it "can declare an alias for an already-declared decorator" do
 		fixture_module.decorator( :with_no_email ) { self.email = nil }
 		fixture_module.alias_decorator( :emailless, :with_no_email )

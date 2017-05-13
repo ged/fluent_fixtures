@@ -75,7 +75,7 @@ class FluentFixtures::Factory
 			if !decorator_name
 				self.apply_inline_decorator( instance, block )
 			elsif self.fixture_module.decorators.key?( decorator_name )
-				self.apply_named_decorator( instance, decorator_args, decorator_name )
+				instance = self.apply_named_decorator( instance, decorator_args, decorator_name )
 			else
 				self.apply_method_decorator( instance, decorator_args, decorator_name, block )
 			end
@@ -105,13 +105,7 @@ class FluentFixtures::Factory
 	def create( args={}, &block )
 		obj = self.with_transaction do
 			obj = self.instance( args, &block )
-			obj = self.fixture_module.call_before_saving( obj ) if
-				self.fixture_module.respond_to?( :call_before_saving )
-
-			self.try_to_save( obj )
-
-			obj = self.fixture_module.call_after_saving( obj ) if
-				self.fixture_module.respond_to?( :call_after_saving )
+			obj = self.try_to_save( obj )
 			obj
 		end
 
@@ -186,9 +180,14 @@ class FluentFixtures::Factory
 	### +decorator_name+ to the specified +instance+.
 	def apply_named_decorator( instance, args, decorator_name )
 		decorator_block = self.fixture_module.decorators[ decorator_name ]
-		self.log.debug "Applying decorator %p (%p) to a %p with args: %p" %
-			[ decorator_name, decorator_block, instance.class, args ]
+		decorator_options = self.fixture_module.decorator_options[ decorator_name ] || {}
+		self.log.debug "Applying decorator %p (%p - %p) to a %p with args: %p" %
+			[ decorator_name, decorator_block, decorator_options, instance.class, args ]
+
+		instance = self.try_to_save( instance ) if decorator_options[:presave]
 		instance.instance_exec( *args, &decorator_block )
+
+		return instance
 	end
 
 
@@ -222,11 +221,23 @@ class FluentFixtures::Factory
 	### Try various methods for saving the given +object+, logging a warning if it doesn't
 	### respond to any of them.
 	def try_to_save( object )
-		CREATE_METHODS.each do |methodname|
-			return object.public_send( methodname ) if object.respond_to?( methodname )
+		object = self.fixture_module.call_before_saving( object ) if
+			self.fixture_module.respond_to?( :call_before_saving )
+
+		save_method = CREATE_METHODS.find do |methodname|
+			object.respond_to?( methodname )
 		end
 
-		self.log.warn "create: don't know how to save %p" % [ object ]
+		if save_method
+			object.public_send( save_method )
+		else
+			self.log.warn "create: don't know how to save %p" % [ object ]
+		end
+
+		object = self.fixture_module.call_after_saving( object ) if
+			self.fixture_module.respond_to?( :call_after_saving )
+
+		return object
 	end
 
 
