@@ -1,6 +1,13 @@
+##  v0.5.0 [2017-05-12] Michael Granger <ged@FaerieMUD.org>
+
+Enhancements:
+
+- Add a `presave` option for decorators that need a saved instance.
+
+
 ## v0.4.0 [2016-12-13] Michael Granger <ged@FaerieMUD.org>
 
-Enchancements:
+Enhancements:
 
 - Added `depends_on` to the fixture DSL.
 
