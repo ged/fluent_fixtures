@@ -1,3 +1,14 @@
+##  v0.6.0 [2017-06-26] Michael Granger <ged@FaerieMUD.org>
+
+Enhancements:
+
+- Add support for mutator blocks to factory generators.
+
+Documentation:
+
+- Added the beginnings of API docs.
+
+
 ##  v0.5.0 [2017-05-12] Michael Granger <ged@FaerieMUD.org>
 
 Enhancements:
