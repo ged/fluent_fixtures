@@ -129,15 +129,17 @@ class FluentFixtures::Factory
 
 
 	### Return an infinite generator for unsaved instances of the fixtured object.
-	def generator( create: false, limit: DEFAULT_GENERATOR_LIMIT )
+	def generator( create: false, limit: DEFAULT_GENERATOR_LIMIT, &block )
 		return Enumerator.new( limit || Float::INFINITY ) do |yielder|
 			count = 0
+			constructor = create ? :create : :instance
 			loop do
 				break if limit && count >= limit
-				obj = if create
-						self.create
+
+				obj = if block
+						self.send( constructor, &block.curry(2)[count] )
 					else
-						self.instance
+						self.send( constructor )
 					end
 
 				yielder.yield( obj )

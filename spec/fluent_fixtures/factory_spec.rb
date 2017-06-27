@@ -386,6 +386,21 @@ describe FluentFixtures::Factory do
 			expect( enum.size ).to eq( Float::INFINITY )
 		end
 
+
+		it "yields each new object and the index to a block passed to the generator" do
+			enum = factory.generator do |i, obj|
+				obj.email = "user#{i}@example.com"
+			end
+
+			instances = enum.take( 5 )
+
+			expect( instances[0].email ).to eq( 'user0@example.com' )
+			expect( instances[1].email ).to eq( 'user1@example.com' )
+			expect( instances[2].email ).to eq( 'user2@example.com' )
+			expect( instances[3].email ).to eq( 'user3@example.com' )
+			expect( instances[4].email ).to eq( 'user4@example.com' )
+		end
+
 	end
 
 end
