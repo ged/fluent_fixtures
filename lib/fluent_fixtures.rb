@@ -5,7 +5,20 @@
 require 'loggability'
 
 
-# Fluent fixtures
+# A toolkit for building testing objects with a fluent interface.
+#
+# The three main parts of fluent_fixtures are the Collection extension module,
+# the DSL module, and the Factory class.
+#
+# The Collection is what you extend a Module with when you're setting up a
+# collection of fixtures for a particular codebase.
+#
+# The DSL module contains methods for declaring individual fixtures for a
+# Collection.
+#
+# Factories are the objects that provide the fluent interface set up by the
+# decorators that evetually create the fixtured objects.
+#
 module FluentFixtures
 	extend Loggability
 

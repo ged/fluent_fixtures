@@ -36,8 +36,8 @@ If you're already on your way and just want some API docs, [we got those, too](F
 ## Contributing
 
 You can check out the current development source with Mercurial via its
-{project page}[http://bitbucket.org/ged/fluent_fixtures]. Or if you prefer Git, via 
-{its Github mirror}[https://github.com/ged/fluent_fixtures].
+[project page][bitbucket]. Or if you prefer Git, via [its Github
+mirror][github].
 
 After checking out the source, run:
 
@@ -77,4 +77,7 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+
+[bitbucket]: http://bitbucket.org/ged/fluent_fixtures
+[github]: https://github.com/ged/fluent_fixtures
 

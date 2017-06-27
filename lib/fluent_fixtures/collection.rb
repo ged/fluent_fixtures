@@ -7,7 +7,11 @@ require 'loggability'
 require 'fluent_fixtures' unless defined?( FluentFixtures )
 
 
-# Extension module for fixture collection modules
+# The extension module for declaring a collection of fixtures. It has three
+# responsibilities: it makes the Module an extension itself for setting up
+# individual fixture modules, it adds the methods for loading fixtures by name
+# (or loading them all), and it adds data structures to the extended module so
+# it can serve as a repository for loaded fixtures.
 module FluentFixtures::Collection
 	extend Loggability
 
