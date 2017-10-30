@@ -1,3 +1,10 @@
+## v0.6.1 [2017-10-30] Michael Granger <ged@FaerieMUD.org>
+
+Bugfixes:
+
+- Make decorator aliases use the same options as the original
+
+
 ##  v0.6.0 [2017-06-26] Michael Granger <ged@FaerieMUD.org>
 
 Enhancements:
