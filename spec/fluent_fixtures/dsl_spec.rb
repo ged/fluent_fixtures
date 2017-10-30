@@ -106,6 +106,17 @@ describe FluentFixtures::DSL do
 	end
 
 
+	it "copies options of aliased decorators" do
+		fixture_module.decorator( :with_renters, presave: true ) do |*renters|
+			renters.each {|r| self.add(r) }
+		end
+		fixture_module.alias_decorator( :renters, :with_renters )
+
+		expect( fixture_module.decorator_options[:with_renters] ).to include( presave: true )
+		expect( fixture_module.decorator_options[:renters] ).to include( presave: true )
+	end
+
+
 	it "raises an error when an alias for a non-existent decorator is declared" do
 		expect {
 			fixture_module.alias_decorator( :an_alias, :nonexistent_decorator )

@@ -79,6 +79,8 @@ module FluentFixtures::DSL
 		block = self.decorators[ original_name.to_sym ] or
 			raise ScriptError, "undefined decorator %p" % [ original_name ]
 		self.decorators[ new_name.to_sym ] = block
+		self.decorator_options[ new_name.to_sym ] =
+			self.decorator_options[ original_name.to_sym ].dup
 	end
 
 
