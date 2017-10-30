@@ -1,9 +1,6 @@
 # fluent_fixtures
 
 home
-: http://deveiate.org/projects/FluentFixtures
-
-code
 : http://bitbucket.org/ged/fluent_fixtures
 
 github
