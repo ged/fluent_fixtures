@@ -14,13 +14,13 @@ module FluentFixtures::DSL
 	# The Hash of decorators declared for this fixture module
 	attr_reader :decorators
 
+	##
 	# The Hash of options hashes for declared decorators
 	attr_reader :decorator_options
 
 	##
 	# The name of the base fixture for the fixture module as a Symbol
 	attr_accessor :base_fixture
-
 
 	##
 	# The FluentFixtures::Collection the fixture is part of
