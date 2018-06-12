@@ -181,7 +181,8 @@ class FluentFixtures::Factory
 	### Apply a decorator declared in the fixture module by the given
 	### +decorator_name+ to the specified +instance+.
 	def apply_named_decorator( instance, args, decorator_name )
-		decorator_block = self.fixture_module.decorators[ decorator_name ]
+		decorator_block = self.fixture_module.decorators[ decorator_name ] or
+			raise "non-existent fixture `%s`" % [ decorator_name ]
 		decorator_options = self.fixture_module.decorator_options[ decorator_name ] || {}
 		self.log.debug "Applying decorator %p (%p - %p) to a %p with args: %p" %
 			[ decorator_name, decorator_block, decorator_options, instance.class, args ]

@@ -73,11 +73,11 @@ module FluentFixtures::DSL
 	###
 	### Example:
 	###
-	###    decorator :foo { ... }
-	###    decorator :bar { ... }
-	###    compose( :simple => :foo ) { ... }
-	###    compose( :complex => [:foo, :bar] ) { ... }
-	###    compose( :complex_with_args => {foo: [1,2], bar: "Something"} ) { ... }
+	###     decorator :foo { ... }
+	###     decorator :bar { ... }
+	###     compose( :simple => :foo ) { ... }
+	###     compose( :complex => [:foo, :bar] ) { ... }
+	###     compose( :complex_with_args => {foo: [1,2], bar: "Something"} ) { ... }
 	def compose( **hash, &block )
 		name, components = hash.first
 

@@ -450,6 +450,17 @@ describe FluentFixtures::Factory do
 			expect( object.email ).to eq( 'xxxxxx.xxxxxx@xxxxxxx.xxx' )
 		end
 
+
+		it "raises a useful error if composed from a non-existent fixture" do
+			fixture_module.compose( :anonymized => :with_anonymized_email ) do
+				self.name = 'Xxxx Xxxxxxxxx'
+			end
+
+			expect {
+				factory.anonymized.instance
+			}.to raise_error( /non-existent fixture `with_anonymized_email`/i )
+		end
+
 	end
 
 end
