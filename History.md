@@ -1,3 +1,11 @@
+## v0.7.0 [2018-06-12] Michael Granger <ged@FaerieMUD.org>
+
+Enhancements:
+
+- Add composed decorators
+- Raise a more-informative error when invoking a non-existent fixture.
+
+
 ## v0.6.1 [2017-10-30] Michael Granger <ged@FaerieMUD.org>
 
 Bugfixes:
