@@ -67,6 +67,33 @@ module FluentFixtures::DSL
 	end
 
 
+	### Declare a decorator that is composed out of other decorators and an optional
+	### +block+. The first +hash+ pair should be the name of the declared decorator
+	### and the names of the decorator/s it is composed of.
+	###
+	### Example:
+	###
+	###    decorator :foo { ... }
+	###    decorator :bar { ... }
+	###    compose( :simple => :foo ) { ... }
+	###    compose( :complex => [:foo, :bar] ) { ... }
+	###    compose( :complex_with_args => {foo: [1,2], bar: "Something"} ) { ... }
+	def compose( **hash, &block )
+		name, components = hash.first
+
+		raise ArgumentError, "expected a name and one or more component decorators" unless name
+		unless [Symbol, Array, Hash].include?( components.class )
+			raise ArgumentError, "invalid compose values: expected symbol, array, or hash; got %p" %
+				[ components.class ]
+		end
+
+		options = hash.reject {|k,_| k == name }.merge( prelude: components )
+		block ||= Proc.new {}
+
+		self.decorator( name, options, &block )
+	end
+
+
 	### Returns +true+ if there is a decorator with the specified +name+.
 	def decorator?( name )
 		return self.decorators.key?( name.to_sym )

@@ -403,5 +403,54 @@ describe FluentFixtures::Factory do
 
 	end
 
+
+	describe "composed decorators" do
+
+		it "applies a single-decorator prelude before running" do
+			fixture_module.decorator( :with_anonymized_email ) { self.email = 'xxx@xxx.xxx' }
+			fixture_module.decorator( :with_anonymized_login ) { self.login = 'xxxxxxx' }
+			fixture_module.compose( :anonymized => :with_anonymized_email ) do
+				self.name = 'Xxxx Xxxxxxxxx'
+			end
+
+			object = factory.anonymized.instance
+
+			expect( object.name ).to eq( 'Xxxx Xxxxxxxxx' )
+			expect( object.email ).to eq( 'xxx@xxx.xxx' )
+			expect( object.login ).to_not eq( 'xxxxxxx' )
+		end
+
+
+		it "applies a multi-decorator prelude before running" do
+			fixture_module.decorator( :with_anonymized_email ) { self.email = 'xxx@xxx.xxx' }
+			fixture_module.decorator( :with_anonymized_login ) { self.login = 'xxxxxxx' }
+			fixture_module.compose( :anonymized => [:with_anonymized_email, :with_anonymized_login] ) do
+				self.name = 'Xxxx Xxxxxxxxx'
+			end
+
+			object = factory.anonymized.instance
+
+			expect( object.name ).to eq( 'Xxxx Xxxxxxxxx' )
+			expect( object.email ).to eq( 'xxx@xxx.xxx' )
+			expect( object.login ).to eq( 'xxxxxxx' )
+		end
+
+
+		it "applies a decorator prelude with arguments before running" do
+			fixture_module.decorator( :with_anonymized_email ) do |base_email='xxx@xxxx.com'|
+				self.email = base_email.gsub(/\w/, 'x')
+			end
+			fixture_module.compose( :anonymized => {with_anonymized_email: 'thomas.dalton@example.com'} ) do
+				self.name = 'Xxxx Xxxxxxxxx'
+			end
+
+			object = factory.anonymized.instance
+
+			expect( object.name ).to eq( 'Xxxx Xxxxxxxxx' )
+			expect( object.email ).to eq( 'xxxxxx.xxxxxx@xxxxxxx.xxx' )
+		end
+
+	end
+
 end
 

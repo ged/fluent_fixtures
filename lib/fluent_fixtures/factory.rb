@@ -186,6 +186,8 @@ class FluentFixtures::Factory
 		self.log.debug "Applying decorator %p (%p - %p) to a %p with args: %p" %
 			[ decorator_name, decorator_block, decorator_options, instance.class, args ]
 
+		self.apply_prelude( instance, decorator_options[:prelude] ) if decorator_options[:prelude]
+
 		instance = self.try_to_save( instance ) if decorator_options[:presave]
 		instance.instance_exec( *args, &decorator_block )
 
@@ -202,6 +204,28 @@ class FluentFixtures::Factory
 			instance.public_send( name, *args )
 		else
 			instance.public_send( name, *args, &block )
+		end
+	end
+
+
+	### Apply a decorator +prelude+ to the current instance.
+	def apply_prelude( instance, prelude, args=[] )
+		case prelude
+		when Symbol
+			self.log.debug "Applying single prelude decorator: %p" % [ prelude ]
+			self.apply_named_decorator( instance, args, prelude )
+		when Array
+			self.log.debug "Applying multiple prelude decorators: %p" % [ prelude ]
+			prelude.each do |sublude|
+				self.apply_prelude( instance, sublude, args )
+			end
+		when Hash
+			self.log.debug "Applying one or more prelude decorators with args: %p" % [ prelude ]
+			prelude.each do |sublude, args|
+				self.apply_prelude( instance, sublude, args )
+			end
+		else
+			raise ArgumentError, "unhandled prelude type %p" % [ prelude.class ]
 		end
 	end
 

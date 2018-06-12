@@ -14,11 +14,12 @@ describe FluentFixtures::DSL do
 		Class.new do
 			def initialize( params={} )
 				@saved = false
+				@friends = []
 				params.each do |name, value|
 					self.send( "#{name}=", value )
 				end
 			end
-			attr_accessor :name, :login, :email
+			attr_accessor :name, :login, :email, :friends
 			def save; @saved = true; end
 			def saved?; @saved; end
 			def bizarroify
@@ -139,6 +140,21 @@ describe FluentFixtures::DSL do
 		factory = collection.fixture( &block )
 
 		expect( factory.constructor_block ).to eq( block )
+	end
+
+
+	it "can declare composed decorators" do
+		fixture_module.decorator( :with_first_name ) { self.first_name = 'Mark' }
+		fixture_module.decorator( :with_last_name ) { self.last_name = 'Walberg' }
+		fixture_module.decorator( :with_friends ) do
+			self.friends = [ 'Scott Ross', 'Hector Barros', 'Terry Yancey', 'Anothony Thomas' ]
+		end
+
+		fixture_module.compose( :marky_mark => [:with_first_name, :with_last_name, :with_friends] )
+
+		expect( fixture_module ).to have_decorator( :marky_mark )
+		expect( fixture_module.decorator_options[:marky_mark] ).
+			to include( prelude: [:with_first_name, :with_last_name, :with_friends] )
 	end
 
 
