@@ -94,6 +94,16 @@ module FluentFixtures::DSL
 	end
 
 
+	### Declare decorators for the +other_fixture+ instead of the current one.
+	def additions_for( other_fixture, &block )
+		self.depends_on( other_fixture )
+		mod = self.collection.modules[ other_fixture ] or
+			raise "no such fixture %p" % [ other_fixture ]
+
+		mod.module_eval( &block )
+	end
+
+
 	### Returns +true+ if there is a decorator with the specified +name+.
 	def decorator?( name )
 		return self.decorators.key?( name.to_sym )

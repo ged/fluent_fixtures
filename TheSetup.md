@@ -164,6 +164,45 @@ The block executes in the context of the new object if the `base` block doesn't 
 ### Hooks
 
 
+### Extending Other Fixtures
+
+Sometimes you want a collection of decorators that apply to fixtures declared elsewhere. You can do this to keeps concerns which are separated in the code separate in fixtures which test it, or just to aid in organizing fixtures according to criteria other than their fixtured classes.
+
+To do this, you can use the `#additions_for` declaration. It takes the name of the fixture you wish to extend as its first argument, and a block that will be evaluated in the context of the target fixture as the second:
+
+    # lib/acme/fixtures/customers.rb
+    require 'faker'
+
+    module Acme::Fixtures::Customers
+      # ...
+      base :customer do
+        self.first_name ||= Faker::Name.first_name
+        self.last_name ||= Faker::Name.last_name
+      end
+    end
+
+
+    # lib/acme/fixtures/stripe.rb
+    require 'stripe'
+
+    module Acme::Fixtures::Stripe
+
+      additions_for( :customers ) do
+        decorator :with_stripe_custom_account do
+          acct = Stripe::Account.create({
+              :country => "US",
+              :type => "custom"
+          })
+          self.stripe_id = acct.id
+        end
+      end
+
+    end
+
+    user = Acme::Fixtures.customer.with_stripe_custom_account.create
+    user.stripe_id
+    # => "acct_12QkqYGSOD4VcegJ"
+
 
 ## RSpec
 
