@@ -1,3 +1,10 @@
+## v0.8.0 [2018-08-28] Michael Granger <ged@FaerieMUD.org>
+
+Enhancements:
+
+- Add syntax for adding decorators to already-existing fixtures
+
+
 ## v0.7.0 [2018-06-12] Michael Granger <ged@FaerieMUD.org>
 
 Enhancements:
