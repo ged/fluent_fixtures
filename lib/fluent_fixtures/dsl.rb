@@ -95,8 +95,9 @@ module FluentFixtures::DSL
 
 
 	### Declare decorators for the +other_fixture+ instead of the current one.
-	def additions_for( other_fixture, &block )
-		self.depends_on( other_fixture )
+	def additions_for( other_fixture, depends_on: nil, &block )
+		self.depends_on( depends_on ) if depends_on
+
 		mod = self.collection.modules[ other_fixture ] or
 			raise "no such fixture %p" % [ other_fixture ]
 

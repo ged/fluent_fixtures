@@ -159,9 +159,27 @@ describe FluentFixtures::DSL do
 
 
 	it "can extend an existing fixture with more decorators" do
+		collection.modules[ :tyrant ] = fixture_module
+
+		mod = Module.new do
+			def self::name ; "FixtureAdditionTests"; end
+		end
+
+		mod.extend( collection )
+		mod.additions_for( :tyrant ) do
+			decorator :despotic do
+				self.authority = :absolute
+			end
+		end
+
+		expect( fixture_module ).to have_decorator( :despotic )
+	end
+
+
+	it "can add a dependency via an extension" do
 		expect( collection ).to receive( :load ) do |*args|
 			expect( args ).to eq([ :tyrants ])
-			collection.modules[ :tyrants ] = fixture_module
+			collection.modules[ :tyrant ] = fixture_module
 		end
 
 		mod = Module.new do
@@ -169,7 +187,7 @@ describe FluentFixtures::DSL do
 		end
 
 		mod.extend( collection )
-		mod.additions_for( :tyrants ) do
+		mod.additions_for( :tyrant, depends_on: :tyrants ) do
 			decorator :despotic do
 				self.authority = :absolute
 			end
