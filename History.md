@@ -1,3 +1,14 @@
+## v0.8.1 [2018-11-20] Michael Granger <ged@FaerieMUD.org>
+
+Bugfixes:
+
+- Make dependencies explicit in `additions_for`.
+  This fixes the case where the base fixture is not named the same
+  thing as the file that it is defined in. You can now explicitly
+  depend on another fixture file with the `depends_on` keyword
+  argument to `additions_for`.
+
+
 ## v0.8.0 [2018-08-28] Michael Granger <ged@FaerieMUD.org>
 
 Enhancements:

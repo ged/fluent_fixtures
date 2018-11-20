@@ -24,7 +24,7 @@ module FluentFixtures
 
 
 	# Package version
-	VERSION = '0.8.0'
+	VERSION = '0.8.1'
 
 	# Version control revision
 	REVISION = %q$Revision$
