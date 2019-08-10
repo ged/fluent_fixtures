@@ -52,7 +52,7 @@ describe FluentFixtures::Factory do
 		mod.base( :fixture ) do
 			self.name  ||= Faker::Name.name
 			self.login ||= Faker::Internet.user_name
-			self.email ||= Faker::Internet.email( self.login )
+			self.email ||= Faker::Internet.email( name: self.login )
 		end
 		mod
 	end

@@ -32,7 +32,7 @@ hoespec = Hoe.spec 'fluent_fixtures' do |spec|
 	spec.dependency 'loggability', '~> 0.11'
 	spec.dependency 'inflecto', '~> 0.0'
 
-	spec.dependency 'faker',                   '~> 1.6', :developer
+	spec.dependency 'faker',                   '~> 2.1', :developer
 	spec.dependency 'hoe-deveiate',            '~> 0.3', :developer
 	spec.dependency 'simplecov',               '~> 0.12', :developer
 	spec.dependency 'rdoc-generator-fivefish', '~> 0.1', :developer
