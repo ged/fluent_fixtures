@@ -1,6 +1,8 @@
+ChangeLog
 coverage/
 doc/
-\.esproj/
-\.yml$
-ChangeLog
 pkg/
+\.esproj/
+\.lock$
+\.status$
+\.yml$

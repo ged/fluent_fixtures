@@ -1,7 +1,10 @@
 # fluent_fixtures
 
 home
-: http://bitbucket.org/ged/fluent_fixtures
+: https://hg.sr.ht/~ged/fluent_fixtures
+
+code
+: https://hg.sr.ht/~ged/fluent_fixtures/browse
 
 github
 : https://github.com/ged/fluent_fixtures
@@ -20,6 +23,7 @@ To see a walkthrough of how you might set your own fixtures up, check out the [T
 
 If you're already on your way and just want some API docs, [we got those, too](FluentFixtures.html).
 
+
 ## Prerequisites
 
 * Ruby
@@ -33,20 +37,18 @@ If you're already on your way and just want some API docs, [we got those, too](F
 ## Contributing
 
 You can check out the current development source with Mercurial via its
-[project page][bitbucket]. Or if you prefer Git, via [its Github
-mirror][github].
+[project page][sr.ht]. Or if you prefer Git, via [its Github mirror][github].
 
 After checking out the source, run:
 
-    $ rake newb
+    $ rake setup
 
-This task will install any missing dependencies, run the tests/specs,
-and generate the API documentation.
+This task will install dependencies, and do any other necessary setup for development.
 
 
 ## License
 
-Copyright (c) 2016, Michael Granger
+Copyright (c) 2016-2020, Michael Granger
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -75,6 +77,6 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-[bitbucket]: http://bitbucket.org/ged/fluent_fixtures
+[sr.ht]: https://hg.sr.ht/~ged/fluent_fixtures
 [github]: https://github.com/ged/fluent_fixtures
 

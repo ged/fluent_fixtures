@@ -6,7 +6,7 @@ require 'faker'
 require 'fluent_fixtures/factory'
 
 
-describe FluentFixtures::Factory do
+RSpec.describe FluentFixtures::Factory do
 
 	let( :collection ) { Module.new {extend FluentFixtures::Collection} }
 

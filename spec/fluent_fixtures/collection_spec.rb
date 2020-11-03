@@ -5,7 +5,7 @@ require_relative '../spec_helper'
 require 'fluent_fixtures/collection'
 
 
-describe FluentFixtures::Collection do
+RSpec.describe FluentFixtures::Collection do
 
 	let( :collection ) do
 		mod = Module.new

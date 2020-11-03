@@ -34,9 +34,9 @@ module FluentFixtures
 	log_as :fluent_fixtures
 
 
-	require 'fluent_fixtures/collection'
-	require 'fluent_fixtures/dsl'
-	require 'fluent_fixtures/factory'
+	autoload :Collection, 'fluent_fixtures/collection'
+	autoload :DSL, 'fluent_fixtures/dsl'
+	autoload :Factory, 'fluent_fixtures/factory'
 
 end # module FluentFixtures
 

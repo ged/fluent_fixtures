@@ -6,7 +6,7 @@ require 'fluent_fixtures/dsl'
 require 'faker'
 
 
-describe FluentFixtures::DSL do
+RSpec.describe FluentFixtures::DSL do
 
 	let( :collection ) { Module.new {extend FluentFixtures::Collection} }
 

@@ -90,7 +90,7 @@ module FluentFixtures::DSL
 		options = hash.reject {|k,_| k == name }.merge( prelude: components )
 		block ||= Proc.new {}
 
-		self.decorator( name, options, &block )
+		self.decorator( name, **options, &block )
 	end
 
 
