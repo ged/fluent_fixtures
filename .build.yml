@@ -1,0 +1,15 @@
+image: freebsd/12.x
+packages:
+  - ruby
+  - rubygem-gems
+  - rubygem-rake
+sources:
+  - hg+https://hg.sr.ht/~ged/fluent_fixtures
+tasks:
+  - setup: |
+      cd fluent_fixtures
+      gem install --user-install -Ng
+  - test: |
+      export PATH=$PATH:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin
+      cd fluent_fixtures
+      COVERAGE=1 rspec -cfd
