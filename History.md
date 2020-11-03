@@ -1,3 +1,22 @@
+# Release History for fluent_fixtures
+
+---
+
+## v0.9.0 [2020-11-02] Michael Granger <ged@FaerieMUD.org>
+
+Improvements:
+
+- De-hoeify
+- Update the Sequel example's bundle
+- Bump Faker version to latest, fix usage
+- Update for Ruby 2.7
+- Update project links (bitbucket -> sr.ht)
+
+Bugfixes:
+
+- Fix passing keywords as trailing hash
+
+
 ## v0.8.1 [2018-11-20] Michael Granger <ged@FaerieMUD.org>
 
 Bugfixes:

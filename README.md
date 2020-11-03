@@ -46,6 +46,11 @@ After checking out the source, run:
 This task will install dependencies, and do any other necessary setup for development.
 
 
+## Author(s)
+
+* Michael Granger <ged@faeriemud.org>
+
+
 ## License
 
 Copyright (c) 2016-2020, Michael Granger

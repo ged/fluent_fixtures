@@ -1,6 +1,6 @@
 ChangeLog
 coverage/
-doc/
+docs/
 pkg/
 \.esproj/
 \.lock$
