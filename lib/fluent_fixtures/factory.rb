@@ -190,7 +190,13 @@ class FluentFixtures::Factory
 		self.apply_prelude( instance, decorator_options[:prelude] ) if decorator_options[:prelude]
 
 		instance = self.try_to_save( instance ) if decorator_options[:presave]
-		instance.instance_exec( *args, &decorator_block )
+		if args[-1].is_a?(Hash)
+			kwargs = args[-1]
+			args = args[0..-2]
+		else
+			kwargs = {}
+		end
+		instance.instance_exec( *args, **kwargs, &decorator_block )
 
 		return instance
 	end

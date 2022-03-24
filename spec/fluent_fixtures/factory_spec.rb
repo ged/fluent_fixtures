@@ -336,6 +336,38 @@ RSpec.describe FluentFixtures::Factory do
 	end
 
 
+	it "handles keyword-only decorators" do
+		fixture_module.decorator( :set_fields ) do |name: nil, email: nil|
+			self.name = name
+			self.email = email
+		end
+
+		object = factory.set_fields( name: 'x', email: 'a@b.c' ).instance
+
+		expect( object ).to be_a( fixtured_class )
+		expect( object.name ).to eq( 'x' )
+		expect( object.email ).to eq( 'a@b.c' )
+		expect( object ).to_not be_saved
+	end
+
+
+	it "handles mixed position and keyword decorators" do
+		fixture_module.decorator( :set_fields ) do |arg1, arg2=2, kwarg: nil|
+			self.name = arg1
+			self.email = arg2
+			self.login = kwarg
+		end
+
+		object = factory.set_fields( 'x', 'a@b.c', kwarg: 'mylogin' ).instance
+
+		expect( object ).to be_a( fixtured_class )
+		expect( object.name ).to eq( 'x' )
+		expect( object.email ).to eq( 'a@b.c' )
+		expect( object.login ).to eq( 'mylogin' )
+		expect( object ).to_not be_saved
+	end
+
+
 	describe "enumerator/generator" do
 
 		it "is Enumerable" do

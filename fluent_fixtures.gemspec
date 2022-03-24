@@ -5,6 +5,7 @@ Gem::Specification.new do |s|
   s.name = "fluent_fixtures".freeze
   s.version = "0.9.0.pre.20201102181742"
 
+  s.authors = [ "Michael Granger" ]
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1".freeze) if s.respond_to? :required_rubygems_version=
   s.metadata = { "changelog_uri" => "http://deveiate.org/code/fluent_fixtures/History_md.html", "documentation_uri" => "http://deveiate.org/code/fluent_fixtures", "homepage_uri" => "http://bitbucket.org/ged/fluent_fixtures" } if s.respond_to? :metadata=
   s.require_paths = ["lib".freeze]
