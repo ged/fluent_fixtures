@@ -1,6 +1,12 @@
 # Release History for fluent_fixtures
 
 ---
+## v0.10.0 [2022-04-10] Michael Granger <ged@faeriemud.org>
+
+Enhancements:
+
+- Fix keyword argument decorators in Ruby 3.0. Thanks to rob.galanakis@gmail.com for the patch.
+
 
 ## v0.9.0 [2020-11-02] Michael Granger <ged@FaerieMUD.org>
 
