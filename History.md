@@ -1,6 +1,14 @@
 # Release History for fluent_fixtures
 
 ---
+## v0.11.0 [2023-05-09] Michael Granger <ged@faeriemud.org>
+
+Enhancements:
+
+- Test under Ruby 3.2
+- Update gem-signing cert, dependencies
+
+
 ## v0.10.0 [2022-04-10] Michael Granger <ged@faeriemud.org>
 
 Enhancements:
