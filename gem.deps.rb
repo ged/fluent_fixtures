@@ -1,6 +1,6 @@
 source 'https://rubygems.org/'
 
-gem 'faker', '~> 2.14'
+gem 'faker', '~> 3.2'
 gem 'inflecto', '~> 0.0'
 gem 'loggability', '~> 0.17'
 

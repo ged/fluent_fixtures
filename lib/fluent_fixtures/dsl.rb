@@ -31,6 +31,9 @@ module FluentFixtures::DSL
 	# Fixture API
 	#
 
+	# :TODO: Add optional args to `base` to pass to the constructor initially, for the case where
+	# there are mandatory constructor args.
+
 	### Declare a base fixture for the current module called +name+, with an optional
 	### initial decorator as a +block+. If no +name+ is given, one is chosen based on the
 	### name of the declaring module.
